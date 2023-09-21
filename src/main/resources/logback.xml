@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ru.aston.oshchepkov_aa.simplepairmaker.log.PatternLayoutAutoCharsetEncoder">
+                <Pattern>
+                    <!--                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%logger{40}) - %msg%n%throwable-->
+                    %d{ISO8601} %-5level [%t] %logger{40} - %msg%n%throwable
+                </Pattern>
+            </encoder>
+    </appender>
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <appender name="File"
+              class="ch.qos.logback.core.FileAppender">
+        <file>logs/log-${bySecond}.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>
+                %d{ISO8601} [%thread] %-5level %logger{40} - %msg%n%throwable
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+    </root>
+
+    <logger name="ru.aston.oshchepkov_aa.simplepairmaker" level="info" additivity="false">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="File"/>
+    </logger>
+
+</configuration>
