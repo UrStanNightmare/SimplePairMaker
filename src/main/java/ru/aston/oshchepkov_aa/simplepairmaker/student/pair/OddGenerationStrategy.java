@@ -12,6 +12,10 @@ public class OddGenerationStrategy implements PairGenerationStrategy {
     public List<StudentPair> createPairs(List<String> students, int questions) {
         log.info("Using odd strategy.");
 
+        if (students.size() < 2){
+            return new ArrayList<>(0);
+        }
+
         var copy = new ArrayList<>(students);
         Collections.shuffle(copy);
 
